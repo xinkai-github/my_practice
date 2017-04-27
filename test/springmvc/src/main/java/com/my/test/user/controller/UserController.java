@@ -1,6 +1,8 @@
 package  com.my.test.user.controller;
 
 import com.my.test.user.bean.User;
+import com.my.test.user.service.interfaces.IUserSV;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController{
+    @Autowired
+    IUserSV userSv;
     @ResponseBody
     @RequestMapping(value="/login" )
-    public String login(HttpServletRequest request,User user){
+    public String login(HttpServletRequest request,User user,Model model){
+        userSv.login(user);
         return "loginSuccess";
 }
     public static void main(String args[]) throws NoSuchMethodException {
